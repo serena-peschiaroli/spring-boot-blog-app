@@ -4,21 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=devide-width, initial-scale=1">
-    <title> :: Home</title>
+    <title> Blog :: Post</title>
 </head>
 <body>
 <div class="container">
-    <h1>Blog Appl</h1>
-    <hr/>
-    <div class="posts-wrapper" th:each="post: ${posts}">
-        <h2>
-            <a th:href="@{'/posts/' + ${post.id}" th:text="${post.title}"> Title</a>
-        </h2>
+    <a th:href="@{'/'}">Home</a>
+    <div class = "post">
+
+        <h2 th:text="${post.title}"> Title </h2>
         <h5 th:text="'Written by ' + ${post.account.firstName}" > Account Firstname</h5>
-        <h5 th:text=" 'Published on ' +  ${post.createdAt}"> Created At </h5>
+        <h5 th:text=" 'Created on ' +  ${post.createdAt}"> Created At </h5>
         <p th:text="${post.body}"> body text </p>
-        <br>
+
     </div>
+
 </div>
 
 </body>
