@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=devide-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> :: Home</title>
 </head>
 <body>
@@ -12,7 +12,7 @@
     <hr/>
     <div class="posts-wrapper" th:each="post: ${posts}">
         <h2>
-            <a th:href="@{'/posts/' + ${post.id}" th:text="${post.title}"> Title</a>
+            <a th:href="@{'/posts/' + ${post.id}}" th:text="${post.title}"> Title</a>
         </h2>
         <h5 th:text="'Written by ' + ${post.account.firstName}" > Account Firstname</h5>
         <h5 th:text=" 'Published on ' +  ${post.createdAt}"> Created At </h5>

@@ -60,7 +60,7 @@ public class SeedData implements CommandLineRunner {
             Post post2 = new Post();
             post2.setTitle("Title of post 2");
             post2.setBody("This is the body of post 2");
-            post1.setAccount(account2);
+            post2.setAccount(account2);
 
             //saving post
             postService.save(post1);

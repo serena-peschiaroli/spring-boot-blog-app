@@ -1,6 +1,8 @@
 package com.serpes.springbootblogapp.controllers;
 
+import com.serpes.springbootblogapp.models.Account;
 import com.serpes.springbootblogapp.models.Post;
+import com.serpes.springbootblogapp.services.AccountService;
 import com.serpes.springbootblogapp.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,9 @@ public class PostController {
      @Autowired
     private PostService postService;
 
+     @Autowired
+    private AccountService accountService;
+
      @GetMapping("/posts/{id}")
     public String getPost(@PathVariable Long id, Model model){
          //find the post by id and result is wrapped in an Optional
@@ -30,6 +35,18 @@ public class PostController {
          }else{
              return "404";
          }
+     }
 
+     @GetMapping("/posts/new")
+    public String createNewPost(Model model){
+         Optional<Account> optionalAccount = accountService.findByEmail("user.user@domain.com");
+                 if(optionalAccount.isPresent()){
+                     Post post = new Post();
+                     post.setAccount(optionalAccount.get());
+                     model.addAttribute("post", post);
+                     return "post_new";
+                 }else{
+                     return "redirect:/";
+                 }
      }
 }

@@ -32,7 +32,6 @@ public class Post {
     //TODO: define  fetch strategies lazy || eager
 
     //reverse relationship with account, many to one
-    @OneToMany(mappedBy = "account")
     //ensures that every post must be associated with an account
     @NotNull
     @ManyToOne
