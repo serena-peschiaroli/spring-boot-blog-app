@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -31,4 +33,20 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<Post> posts;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "account_authority",
+            joinColumns = {@JoinColumn(name = "account.id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
+    Set<Authority> authorities = new HashSet<>();
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "email='" + email + "'" +
+                ", firstName='" + firstName + "'" +
+                ", lastName='" + lastName + "'" +
+                ", authorities=" + authorities +
+                '}';
+    }
 }

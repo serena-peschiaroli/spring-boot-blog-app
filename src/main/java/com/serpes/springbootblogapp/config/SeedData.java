@@ -1,14 +1,18 @@
 package com.serpes.springbootblogapp.config;
 
 import com.serpes.springbootblogapp.models.Account;
+import com.serpes.springbootblogapp.models.Authority;
 import com.serpes.springbootblogapp.models.Post;
+import com.serpes.springbootblogapp.repository.AuthorityRepository;
 import com.serpes.springbootblogapp.services.AccountService;
 import com.serpes.springbootblogapp.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 //implements CommandLineRunner to populate the database with initial data when appp starts
 @Component
@@ -20,6 +24,10 @@ public class SeedData implements CommandLineRunner {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private AuthorityRepository authorityRepository;
+
 
 
 
@@ -42,11 +50,17 @@ public class SeedData implements CommandLineRunner {
             account1.setLastName("user");
             account1.setEmail("user.user@domain.com");
             account1.setPassword("password");
+            Set<Authority> authorities1 = new HashSet<>();
+            authorityRepository.findById("ROLE_USER").ifPresent(authorities1::add);
+            account1.setAuthorities(authorities1);
 
             account2.setFirstName("admin");
             account2.setLastName("admin");
             account2.setEmail("admin.admin@domain.com");
             account2.setPassword("password");
+            Set<Authority> authorities2 = new HashSet<>();
+            authorityRepository.findById("ROLE_ADMIN").ifPresent(authorities2::add);
+            account2.setAuthorities(authorities1);
 
             accountService.save(account1);
             accountService.save(account2);
