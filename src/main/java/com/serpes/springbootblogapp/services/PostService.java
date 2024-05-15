@@ -33,6 +33,8 @@ public class PostService {
         if (post.getId()== null){
             post.setCreatedAt(LocalDateTime.now());
         }
+
+        post.setUpdatedAt(LocalDateTime.now());
         //save the post
         return postRepository.save(post);
     }
