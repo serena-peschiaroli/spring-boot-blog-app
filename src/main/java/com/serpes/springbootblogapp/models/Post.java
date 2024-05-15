@@ -29,6 +29,8 @@ public class Post {
 
     private LocalDateTime createdAt;
 
+    private LocalDateTime updatedAt;
+
     //TODO: define  fetch strategies lazy || eager
 
     //reverse relationship with account, many to one
@@ -38,4 +40,16 @@ public class Post {
     //specifies the foreign key column that will link posts to accounts
     @JoinColumn(name = "account_id", referencedColumnName = "id", nullable = false)
     private Account account;
+
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", title='" + title + "'" +
+                ", body='" + body + "'" +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 }
